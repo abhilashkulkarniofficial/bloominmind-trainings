@@ -64,6 +64,7 @@ router.post('/updateUser', function(req, res){
 router.get('/getUser', function(req, res){
     console.log('GET User called');
     if(req.query.token === 'bloominmind'){
+        console.log('User is Authenticated')
         if(req.query.phone === undefined){
             res.send(readFile());
         }else{
@@ -81,10 +82,11 @@ router.get('/getUser', function(req, res){
 router.delete('/deleteUser', function(req, res){
     console.log('DELETE User called');
     if(req.query.token === 'bloominmind'){
+        console.log('User is Authenticated')
         let users = readFile();
-    delete users[req.query.phone];
-    writeFile(users);
-    res.send('User deleted successfully');
+        delete users[req.query.phone];
+        writeFile(users);
+        res.send('User deleted successfully');
     }else{
         res.send("Not authorized to delete users.");
     }
